@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Crew — demo page</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff4d5e'/%3E%3Cpath d='M9 22V10h7a4 4 0 010 8h-7m7 0l5 4' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root { --bg: #0a0a0d; --panel: #14141a; --line: #24242e; --text: #ececf3; --muted: #9a9aac; --accent: #ff4d5e; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+  header { position: sticky; top: 0; z-index: 5; background: rgba(10,10,13,.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; }
+  .logo svg { width: 30px; height: 30px; }
+  nav { display: flex; gap: 26px; color: var(--muted); font-size: 14px; }
+  .cta { background: var(--accent); color: #fff; padding: 9px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; }
+  .hero { padding: 90px 0 70px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
+  .eyebrow { display: inline-block; color: var(--accent); border: 1px solid rgba(255,77,94,.4); padding: 4px 10px; border-radius: 999px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+  h1 { font-size: 64px; line-height: 1.02; margin: 18px 0; letter-spacing: -.02em; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 18px; max-width: 520px; }
+  .buttons { display: flex; gap: 12px; margin-top: 28px; }
+  .ghost-btn { border: 1px solid var(--line); padding: 9px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; }
+  .portrait { aspect-ratio: 4/5; border-radius: 18px; background: radial-gradient(circle at 30% 25%, #ff8a6a, transparent 55%), linear-gradient(160deg, #ff4d5e, #3a0d2e 70%); box-shadow: 0 30px 80px rgba(255,77,94,.25); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 10px 0 70px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .stat b { display: block; font-size: 30px; color: var(--accent); }
+  .stat span { color: var(--muted); font-size: 13px; }
+  h2 { font-size: 38px; margin: 0 0 10px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 32px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-bottom: 80px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .thumb { height: 140px; border-radius: 10px; margin-bottom: 16px; background: linear-gradient(135deg, #22222c, #2e1b26); }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .tags { display: flex; gap: 6px; margin-top: 14px; }
+  .tags span { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: #1f1f28; color: #c9c9d6; }
+  .contact { text-align: center; padding: 80px 0 120px; border-top: 1px solid var(--line); }
+  .contact h2 { font-size: 46px; }
+  footer { color: var(--muted); font-size: 13px; text-align: center; padding: 24px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="/"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#ff4d5e"/><path d="M9 22V10h7a4 4 0 010 8h-7m7 0l5 4" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>Rowan Hale</a>
+    <nav><a href="#work">Work</a><a href="#about">About</a><a href="#stack">Stack</a><a href="#contact">Contact</a></nav>
+    <a class="cta" href="#contact">Hire me</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">AI systems engineer</span>
+      <h1>I build software that <em>builds itself</em>.</h1>
+      <p class="lead">Multi-agent pipelines, autonomous tooling and the interfaces that make them feel human. Ten years shipping products for startups and studios.</p>
+      <div class="buttons"><a class="cta" href="#work">See the work</a><a class="ghost-btn" href="#contact">Get in touch</a></div>
+    </div>
+    <div class="portrait" role="img" aria-label="Portrait"></div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><b>42</b><span>Projects shipped</span></div>
+    <div class="stat"><b>16</b><span>Agents in production</span></div>
+    <div class="stat"><b>99.9%</b><span>Uptime last year</span></div>
+    <div class="stat"><b>3.2M</b><span>Tasks automated</span></div>
+  </section>
+
+  <section id="work">
+    <h2>Selected work</h2>
+    <p class="sub">A few things I designed, built and still look after.</p>
+    <div class="grid">
+      <article class="card"><div class="thumb"></div><h3>Relay</h3><p>An agent swarm that triages support tickets and drafts replies in the brand's voice.</p><div class="tags"><span>Agents</span><span>RAG</span></div></article>
+      <article class="card"><div class="thumb"></div><h3>Atlas Ops</h3><p>A control room for long-running jobs, with live traces and one-click rollbacks.</p><div class="tags"><span>Infra</span><span>Realtime</span></div></article>
+      <article class="card"><div class="thumb"></div><h3>Signal</h3><p>Turns call recordings into tagged insights and weekly briefings for sales teams.</p><div class="tags"><span>Audio</span><span>LLM</span></div></article>
+      <article class="card"><div class="thumb"></div><h3>Loom Kit</h3><p>A design system and component library used across six products.</p><div class="tags"><span>Design</span><span>React</span></div></article>
+      <article class="card"><div class="thumb"></div><h3>Quill</h3><p>A writing assistant that learns a team's style guide from their own docs.</p><div class="tags"><span>NLP</span><span>Editor</span></div></article>
+      <article class="card"><div class="thumb"></div><h3>Harbor</h3><p>Self-hosted model gateway with caching, quotas and per-team cost reports.</p><div class="tags"><span>API</span><span>Go</span></div></article>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Let's build something <em style="font-style:normal;color:var(--accent)">wild</em>.</h2>
+    <p class="sub">Booking projects for early next year.</p>
+    <a class="cta" href="mailto:hello@example.com">Start a project</a>
+  </section>
+</main>
+
+<footer>© 2026 Rowan Hale · Demo page for Build Crew</footer>
+
+<script>
+  // Lets you try the effect here without installing the extension:
+  // press Alt+Shift+B, or open this page with ?run in the URL.
+  function crew() {
+    if (window.__buildCrew) return window.__buildCrew.toggle();
+    const s = document.createElement('script');
+    s.src = '../extension/content.js?' + Date.now();
+    document.head.appendChild(s);
+  }
+  addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.code === 'KeyB') crew(); });
+  if (location.search.includes('run')) setTimeout(crew, 400);
+</script>
+</body>
+</html>
