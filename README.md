@@ -76,6 +76,5 @@ python3 scripts/make_icons.py
 ## Credit
 
 The idea of a page being rebuilt by a swarm of multiplayer cursors comes
-from Joel Califa's "Swarm" site and Dhvanil Patel's "Swarm Rebuild"
-extension. This is an independent implementation: no code was taken from
-either project.
+from Joel Califa's "Swarm" site. This is an independent implementation: no code was taken from
+any project.
