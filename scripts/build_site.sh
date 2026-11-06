@@ -2,7 +2,7 @@
 # Packages the portfolio for hosting: copies it into site/ and bundles the
 # Build Crew engine next to it, so visitors can press Alt+Shift+B to watch the
 # page rebuild itself. Deploy with:
-#   npx wrangler pages deploy site --project-name karuna-hazarika
+#   npx wrangler pages deploy
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

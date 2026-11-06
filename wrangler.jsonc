@@ -1,10 +1,8 @@
-// Hosts the portfolio (built into site/ by scripts/build_site.sh) as static
-// assets on Cloudflare Workers. Deploy: ./scripts/build_site.sh && npx wrangler deploy
+// Cloudflare Pages project for the portfolio (https://karunaships.pages.dev).
+// scripts/build_site.sh builds site/; deploy with:
+//   ./scripts/build_site.sh && npx wrangler pages deploy
 {
   "name": "karunaships",
-  "compatibility_date": "2026-11-04",
-  "assets": {
-    "directory": "./site",
-    "not_found_handling": "single-page-application"
-  }
+  "pages_build_output_dir": "./site",
+  "compatibility_date": "2026-11-04"
 }

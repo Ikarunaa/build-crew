@@ -70,15 +70,15 @@ permissions.
 - The typing overlay copies the element's font but can wrap slightly
   differently from the real text; the real element replaces it a moment later.
 
-## Host the portfolio (Cloudflare)
+## Host the portfolio (Cloudflare Pages)
 
 ```bash
-./scripts/build_site.sh && npx wrangler deploy
+./scripts/build_site.sh && npx wrangler pages deploy
 ```
 
 This copies `portfolio/` into `site/` with the Build Crew engine bundled in,
-then publishes it as static assets on Cloudflare Workers
-(`wrangler.jsonc`). Live at https://karunaships.karunaforbusiness.workers.dev
+then uploads it to the `karunaships` Pages project (`wrangler.jsonc`).
+Live at https://karunaships.pages.dev
 
 ## Regenerate the icons
 
