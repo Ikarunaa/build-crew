@@ -1,0 +1,10 @@
+// Hosts the portfolio (built into site/ by scripts/build_site.sh) as static
+// assets on Cloudflare Workers. Deploy: ./scripts/build_site.sh && npx wrangler deploy
+{
+  "name": "karuna-hazarika",
+  "compatibility_date": "2026-11-04",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "single-page-application"
+  }
+}
