@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karuna Hazarika — building SaaS in public</title>
+<meta name="description" content="Karuna Hazarika builds SaaS solo, in public. Maker of PeakPad, Build Crew and an AI editor in the works.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23d4ff3a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-style='italic' text-anchor='middle' fill='%230b0b0c'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0b0c; --panel: #131315; --panel-2: #18181b; --line: #26262a;
+    --text: #f2efe8; --muted: #8f8b84; --accent: #d4ff3a; --accent-ink: #0b0b0c;
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  .label { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+  /* nav */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(11,11,12,.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  header .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 600; letter-spacing: -.01em; }
+  .mark { width: 32px; height: 32px; border-radius: 9px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font: italic 20px/1 var(--serif); }
+  nav { display: flex; gap: 28px; font-size: 14px; color: var(--muted); }
+  nav a:hover { color: var(--text); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; border: 1px solid var(--line); transition: transform .15s, background .15s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-accent { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn-ghost:hover { background: var(--panel-2); }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: 56px; align-items: center; padding: 80px 0 72px; }
+  .status { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: 13px; color: #cfcbc3; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(212,255,58,.15); }
+  h1 { margin: 26px 0 0; font: 400 clamp(64px, 9.6vw, 132px)/.88 var(--serif); letter-spacing: -.02em; }
+  h1 .first { display: block; font-style: italic; }
+  h1 .last { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--text); }
+  .oneliner { margin: 28px 0 0; font-size: 22px; line-height: 1.35; font-weight: 500; max-width: 560px; }
+  .oneliner mark { background: var(--accent); color: var(--accent-ink); padding: 0 6px; border-radius: 4px; }
+  .bio { margin: 18px 0 0; color: var(--muted); max-width: 540px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+  .portrait { position: relative; }
+  .frame { position: relative; aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; background: var(--accent); border: 1px solid var(--line); }
+  .frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.15) brightness(1.05); mix-blend-mode: multiply; display: block; }
+  .handle { position: absolute; left: -18px; bottom: 34px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+  .handle b { display: block; font-size: 15px; }
+  .handle span { font: 500 12px/1.4 var(--mono); color: var(--muted); }
+  .now-chip { position: absolute; right: -14px; top: 28px; background: var(--text); color: var(--bg); border-radius: 999px; padding: 8px 14px; font: 600 12px/1 var(--mono); letter-spacing: .02em; box-shadow: 0 12px 30px rgba(0,0,0,.4); }
+
+  /* ticker */
+  .ticker { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .ticker .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 28px; padding-top: 22px; padding-bottom: 22px; font: italic 26px/1 var(--serif); color: #bdb9b1; }
+  .ticker i { font-style: normal; color: var(--accent); }
+
+  /* sections */
+  section.block { padding: 96px 0 0; }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 36px; }
+  h2 { margin: 10px 0 0; font: 400 clamp(44px, 5.4vw, 68px)/1 var(--serif); letter-spacing: -.01em; }
+  h2 em { color: var(--accent); }
+  .head p { margin: 0; color: var(--muted); max-width: 360px; }
+
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px; transition: border-color .2s, transform .2s; }
+  .card:hover { border-color: #3a3a40; transform: translateY(-2px); }
+  .card.feature { grid-column: span 6; display: grid; grid-template-columns: 1fr 1.05fr; gap: 36px; align-items: center; padding: 34px; }
+  .card.half { grid-column: span 3; }
+  .card.third { grid-column: span 2; }
+  .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .pill { font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: #cfcbc3; }
+  .pill.live { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .pill.soon { border-style: dashed; }
+  .card h3 { margin: 0; font: 400 40px/1.02 var(--serif); }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .chips span { font-size: 13px; padding: 6px 11px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line); color: #dcd8d0; }
+  .card .more { margin-top: auto; padding-top: 6px; font-weight: 600; font-size: 14px; display: inline-flex; gap: 6px; align-items: center; }
+  .card .more:hover { color: var(--accent); }
+
+  /* PeakPad visual: a MacBook-style notch with tools spilling out */
+  .notch-scene { position: relative; aspect-ratio: 16/10; border-radius: 16px; background: radial-gradient(120% 90% at 50% 0%, #2a2440 0%, #141218 55%, #0e0d11 100%); border: 1px solid var(--line); overflow: hidden; }
+  .notch { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 62%; height: 46%; background: #000; border-radius: 0 0 26px 26px; padding: 14px 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-content: start; box-shadow: 0 18px 40px rgba(0,0,0,.6); }
+  .notch .app-ico { grid-column: span 4; display: flex; align-items: center; gap: 10px; font: 600 13px/1 var(--sans); }
+  .notch .app-ico img { width: 26px; height: 26px; border-radius: 7px; }
+  .notch .t { height: 34px; border-radius: 9px; background: #1c1b22; border: 1px solid #2a2932; display: grid; place-items: center; font: 500 10px/1 var(--mono); color: #b9b5c6; }
+  .notch .t.hot { background: #2b2350; border-color: #4a3c8c; color: #e1dbff; }
+  .scene-caption { position: absolute; left: 18px; bottom: 16px; font: 500 12px/1 var(--mono); color: #8f8aa3; }
+
+  .lock { height: 92px; border-radius: 12px; border: 1px dashed #3a3a40; display: grid; place-items: center; color: #6f6c66; font: 500 12px/1 var(--mono); letter-spacing: .06em; background: repeating-linear-gradient(-45deg, transparent 0 10px, rgba(255,255,255,.02) 10px 20px); }
+  .cursors { height: 92px; border-radius: 12px; background: #0e0e10; border: 1px solid var(--line); position: relative; overflow: hidden; }
+  .cursors svg { position: absolute; }
+  .editor { height: 92px; border-radius: 12px; background: #0e0e10; border: 1px solid var(--line); padding: 14px 16px; font: 500 12px/1.6 var(--mono); color: #9a968f; }
+  .editor .k { color: var(--accent); }
+
+  /* now */
+  .now-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .now-item { border-top: 1px solid var(--line); padding-top: 20px; }
+  .now-item .label { color: var(--accent); }
+  .now-item p { margin: 12px 0 0; font-size: 19px; line-height: 1.45; }
+
+  /* contact */
+  .contact { margin-top: 110px; padding: 90px 0 100px; border-top: 1px solid var(--line); text-align: center; }
+  .contact h2 { font-size: clamp(56px, 8vw, 112px); line-height: .95; }
+  .contact p { color: var(--muted); margin: 22px auto 0; max-width: 520px; }
+  .emails { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
+  .emails .btn { font: 600 15px/1 var(--sans); padding: 15px 22px; }
+  footer { border-top: 1px solid var(--line); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; padding-top: 24px; padding-bottom: 24px; color: var(--muted); font-size: 13px; }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 56px; }
+    .portrait { max-width: 420px; }
+    .card.feature { grid-template-columns: 1fr; }
+    .card.half, .card.third { grid-column: span 6; }
+    .head { flex-direction: column; align-items: start; }
+    .now-list { grid-template-columns: 1fr; }
+    .ticker .wrap { font-size: 21px; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 16px; }
+    .ticker .wrap { justify-content: flex-start; gap: 10px 14px; font-size: 19px; }
+    .handle { left: 12px; }
+    .now-chip { right: 12px; }
+    .card, .card.feature { padding: 22px; }
+    .notch { width: 84%; }
+    footer .wrap { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark">K</span>Karuna Hazarika</a>
+    <nav><a href="#work">Work</a><a href="#now">Now</a><a href="#contact">Contact</a></nav>
+    <a class="btn btn-accent" href="#contact">Say hi</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <span class="status"><span class="dot"></span>Building in public, every day</span>
+        <h1><span class="first">Karuna</span><span class="last">Hazarika</span></h1>
+        <p class="oneliner">I build SaaS solo, <mark>in public</mark>: from the first commit to the first sale.</p>
+        <p class="bio">I shipped PeakPad, a Mac app that turns the MacBook notch into 29 tools, eighteen days after the first line of code. Now I'm building AI agents that do real work, starting with an AI editor. I share the code, the revenue and the mistakes along the way.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="#work">See the work ↓</a>
+          <a class="btn btn-ghost" href="https://x.com/Iblamekaruna" target="_blank" rel="noopener">Follow on X ↗</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="frame"><img src="karuna.jpg" alt="Karuna Hazarika"></div>
+        <div class="handle"><b>Karuna</b><span>@Iblamekaruna</span></div>
+        <div class="now-chip">NOW: SHIPPING AN AI EDITOR</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="ticker">
+    <div class="wrap"><span>SaaS</span><i>✦</i><span>Mac apps</span><i>✦</i><span>AI agents</span><i>✦</i><span>Chrome extensions</span><i>✦</i><span>Building in public</span></div>
+  </div>
+
+  <div class="wrap">
+    <section class="block" id="work">
+      <div class="head">
+        <div><span class="label">Selected work</span><h2>Things I've <em>shipped</em> &amp; am shipping</h2></div>
+        <p>Small, sharp products, each built end to end by one person.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card feature">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card-top"><span class="label">Mac app · 2026</span><span class="pill live">Live</span></div>
+            <h3>PeakPad</h3>
+            <p>Turns the MacBook notch into a control centre with 29 tools: music with lyrics, clipboard, a file shelf, a teleprompter, your Stripe sales and your Claude Code usage. One payment, no subscription, no account.</p>
+            <div class="chips"><span>29 tools</span><span>18 days to launch</span><span>139 commits</span><span>No subscription</span></div>
+            <a class="more" href="https://peakpad.app" target="_blank" rel="noopener">peakpad.app ↗</a>
+          </div>
+          <div class="notch-scene" aria-hidden="true">
+            <div class="notch">
+              <div class="app-ico"><img src="peakpad-icon.png" alt="">PeakPad</div>
+              <div class="t hot">Music</div><div class="t">Clipboard</div><div class="t">Shelf</div><div class="t hot">Sales</div>
+              <div class="t">Timer</div><div class="t hot">Claude</div><div class="t">Prompter</div><div class="t">+21</div>
+            </div>
+            <span class="scene-caption">your notch, put to work</span>
+          </div>
+        </article>
+
+        <article class="card third">
+          <div class="card-top"><span class="label">Chrome extension</span><span class="pill live">Built</span></div>
+          <div class="cursors" aria-hidden="true">
+            <svg style="left:22px;top:16px" width="20" height="20" viewBox="0 0 24 24"><path d="M3 2L3 19L8 14.5L11.5 22L14.6 20.6L11.2 13.3L18 13.3Z" fill="#4dd4ff" stroke="#fff" stroke-width="1.5"/></svg>
+            <svg style="left:96px;top:44px" width="20" height="20" viewBox="0 0 24 24"><path d="M3 2L3 19L8 14.5L11.5 22L14.6 20.6L11.2 13.3L18 13.3Z" fill="#ff5c7a" stroke="#fff" stroke-width="1.5"/></svg>
+            <svg style="left:168px;top:12px" width="20" height="20" viewBox="0 0 24 24"><path d="M3 2L3 19L8 14.5L11.5 22L14.6 20.6L11.2 13.3L18 13.3Z" fill="#d4ff3a" stroke="#fff" stroke-width="1.5"/></svg>
+            <svg style="left:220px;top:52px" width="20" height="20" viewBox="0 0 24 24"><path d="M3 2L3 19L8 14.5L11.5 22L14.6 20.6L11.2 13.3L18 13.3Z" fill="#c77dff" stroke="#fff" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Build Crew</h3>
+          <p>Blanks any web page, then a crew of AI-agent cursors rebuilds it live: wireframes, typing, the lot. Press Alt+Shift+B on this page to watch it build itself.</p>
+        </article>
+
+        <article class="card third">
+          <div class="card-top"><span class="label">AI agent</span><span class="pill">In progress</span></div>
+          <div class="editor" aria-hidden="true"><span class="k">agent</span> › tighten the intro<br>✓ cut 3 filler lines<br>✓ moved the hook up</div>
+          <h3>AI Editor</h3>
+          <p>An agent that edits alongside you. It takes plain-language instructions and makes the changes itself. Building it now, in public.</p>
+        </article>
+
+        <article class="card third">
+          <div class="card-top"><span class="label">???</span><span class="pill soon">Soon</span></div>
+          <div class="lock" aria-hidden="true">UNDER WRAPS</div>
+          <h3>Something new</h3>
+          <p>A project I'm not naming yet. Follow along on X to catch it first.</p>
+          <a class="more" href="https://x.com/Iblamekaruna" target="_blank" rel="noopener">Get notified on X ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="now">
+      <div class="head">
+        <div><span class="label">Right now</span><h2>What I'm <em>on</em></h2></div>
+      </div>
+      <div class="now-list">
+        <div class="now-item"><span class="label">Shipping</span><p>Growing PeakPad and listening to every person who uses it.</p></div>
+        <div class="now-item"><span class="label">Building</span><p>An AI editor agent, plus one project I'm keeping quiet for now.</p></div>
+        <div class="now-item"><span class="label">Sharing</span><p>The code, the revenue and the mistakes, out loud on X.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="label">Contact</span>
+      <h2>Let's build<br><em>something.</em></h2>
+      <p>Working on something, want to collaborate, or just want to talk shop about building solo? My inbox is open.</p>
+      <div class="emails">
+        <a class="btn btn-accent" href="mailto:karuna@kayn.co.in">karuna@kayn.co.in</a>
+        <a class="btn btn-ghost" href="mailto:karunaforbusiness@gmail.com">karunaforbusiness@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Karuna Hazarika</span>
+    <span><a href="https://x.com/Iblamekaruna" target="_blank" rel="noopener">X @Iblamekaruna</a> · <a href="https://peakpad.app" target="_blank" rel="noopener">peakpad.app</a></span>
+  </div>
+</footer>
+
+<script>
+  // Build Crew without installing the extension: Alt+Shift+B, or open with ?run.
+  function crew() {
+    if (window.__buildCrew) return window.__buildCrew.toggle();
+    const s = document.createElement('script');
+    s.src = '../extension/content.js?' + Date.now();
+    document.head.appendChild(s);
+  }
+  addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.code === 'KeyB') crew(); });
+  if (location.search.includes('run')) setTimeout(crew, 600);
+</script>
+</body>
+</html>

@@ -36,6 +36,9 @@ python3 -m http.server 8765
 Then open http://localhost:8765/demo/index.html?run (or press Alt+Shift+B
 on that page).
 
+The `portfolio/` folder is Karuna's personal site. Open
+http://localhost:8765/portfolio/index.html?run to watch the crew rebuild it.
+
 ## How it works
 
 `extension/content.js` does everything; `background.js` only injects it when

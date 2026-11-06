@@ -430,7 +430,9 @@
 
     S.host = document.createElement('div');
     S.host.setAttribute('data-bc-host', '');
-    S.host.style.cssText = 'position:absolute;left:0;top:0;width:0;height:0;overflow:visible;z-index:2147483647;pointer-events:none;';
+    // Page-sized and clipped, so cursors flying in from off-screen never add scrollbars.
+    S.host.style.cssText = 'position:absolute;left:0;top:0;width:100%;overflow:clip;z-index:2147483647;pointer-events:none;';
+    fitHost();
     const root = S.host.attachShadow({ mode: 'open' });
     el('style', '', root).textContent = SHADOW_CSS;
     S.doc = el('div', 'doc', root);     // positioned in page coordinates
@@ -506,6 +508,13 @@
     return tile;
   }
 
+  function fitHost() {
+    if (!S) return;
+    S.host.style.height = '0px';
+    const h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, innerHeight);
+    S.host.style.height = h + 'px';
+  }
+
   function onScroll() {
     if (!S || S.phase !== 'build' || S.done) return;
     const now = performance.now();
@@ -538,6 +547,7 @@
     }
 
     if (!s.done && s.built >= s.total) finish();
+    if (now - (s.lastFit || 0) > 1000) { s.lastFit = now; fitHost(); }
     updateHud();
     requestAnimationFrame(tick);
   }
