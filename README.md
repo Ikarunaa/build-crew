@@ -78,7 +78,7 @@ permissions.
 
 This copies `portfolio/` into `site/` with the Build Crew engine bundled in,
 then publishes it as static assets on Cloudflare Workers
-(`wrangler.jsonc`). Live at https://karuna-hazarika.karunaforbusiness.workers.dev
+(`wrangler.jsonc`). Live at https://karunaships.karunaforbusiness.workers.dev
 
 ## Regenerate the icons
 
